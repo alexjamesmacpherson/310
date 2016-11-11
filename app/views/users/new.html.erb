@@ -3,6 +3,7 @@
 
 <%= form_for(@user, url: signup_path) do |f| %>
     <%= render 'shared/error_messages' %>
+
     <%= f.label :name %>
     <%= f.text_field :name %>
 
@@ -15,5 +16,7 @@
     <%= f.label :password_confirmation, "Confirmation" %>
     <%= f.password_field :password_confirmation %>
 
-    <%= f.submit "Create my account" %>
+    <%= f.submit "Create account" %>
 <% end %>
+
+<p>New user? <%= link_to "Already have an account?", login_path %></p>
