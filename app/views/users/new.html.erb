@@ -1,7 +1,11 @@
 <% provide(:title, "Sign Up") %>
 <% provide(:button_text, "Create Account") %>
-<h1>New User</h1>
+<h1>Sign Up</h1>
 
-<%= render 'shared/form' %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render 'shared/form' %>
+  </div>
+</div>
 
-<p>New user? <%= link_to "Already have an account?", login_path %></p>
+<h3><%= link_to "Already have an account?", login_path %></h3>

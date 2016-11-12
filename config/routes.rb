@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'static#home'
 
   get '/about' => 'static#about'
+  get '/contact' => 'static#contact'
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
   get '/login' => 'sessions#new'

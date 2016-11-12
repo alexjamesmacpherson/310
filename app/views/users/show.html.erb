@@ -1,6 +1,9 @@
 <% provide(:title, @user.name) %>
-<h1><%= @user.name %></h1>
-<p><%= @user.email %></p>
+<h1>
+  <%= gravatar_for @user %>
+  <%= @user.name %>
+</h1>
+<h2><%= @user.email %></h2>
 <% if current_user?(@user) %>
-    <%= link_to "Settings", edit_user_path(current_user) %>
+    <h3><%= link_to "Edit Profile", edit_user_path(current_user) %></h3>
 <% end %>

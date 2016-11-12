@@ -5,6 +5,6 @@ class StaticController < ApplicationController
   def about
   end
 
-  def login
+  def contact
   end
 end
