@@ -1,6 +1,7 @@
 <% provide(:title, @user.name) %>
 <h1><%= @user.name %></h1>
 <p><%= @user.email %></p>
-<% if logged_in? %>
+<% if current_user?(@user) %>
     <%= link_to "Settings", edit_user_path(current_user) %>
 <% end %>
+<%= edit_account_activation_url %>
