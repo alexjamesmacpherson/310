@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@eperlego.herokuapp.com.com'
+  default from: 'ePerlogo noreply@eperlego.herokuapp.com'
   layout 'mailer'
 end
