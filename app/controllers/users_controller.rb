@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if !@user.activated
       flash[:warning] = "Account not activated."
-      redirect_to root_url
+      redirect_to users_url
     end
   end
 
