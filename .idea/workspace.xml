@@ -73,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/app/mailers/application_mailer.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="1" column="62" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
+              <caret line="1" column="59" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -695,7 +695,7 @@
       <updated>1478733099499</updated>
       <workItem from="1478733113315" duration="7044000" />
       <workItem from="1478814672208" duration="2008000" />
-      <workItem from="1478821389115" duration="34478000" />
+      <workItem from="1478821389115" duration="34787000" />
     </task>
     <task id="LOCAL-00001" summary="Secure user sessions &amp; cookies with basic sign-up and login forms.">
       <created>1478828251896</created>
@@ -736,7 +736,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43530000" />
+    <option name="totallyTimeSpent" value="43839000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1189,7 +1189,7 @@
     <entry file="file://$PROJECT_DIR$/app/mailers/application_mailer.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="62" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
+          <caret line="1" column="59" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="59" />
           <folding />
         </state>
       </provider>
