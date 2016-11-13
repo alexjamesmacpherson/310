@@ -42,6 +42,7 @@ class UsersController < ApplicationController
   def create
     @school = School.find(current_user.school_id)
     @user = @school.users.build(user_params)
+    @user.color = rand(1...6);
     if @user.save
       @user.send_activation_email
       flash[:info] = "#{@user.name.split[0]} has been sent an email with instructions to activate their account."
