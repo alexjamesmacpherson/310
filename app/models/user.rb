@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  belongs_to :school
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save   :downcase_email
@@ -13,6 +14,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true,
             length: { minimum: 6 },
+            allow_nil: true
+  validates :bio, length: { maximum: 255 },
             allow_nil: true
 
   class << self
@@ -70,6 +73,18 @@ class User < ApplicationRecord
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  def name=(s)
+    write_attribute(:name, s.to_s.strip.titleize)
+  end
+
+  def bio=(s)
+    write_attribute(:bio, s.to_s.strip)
+  end
+
+  def email=(s)
+    write_attribute(:email, s.to_s.strip)
   end
 
   private

@@ -1,9 +1,15 @@
 <% provide(:title, @user.name) %>
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
-<h2><%= @user.email %></h2>
-<% if current_user?(@user) %>
-    <h3><%= link_to "Edit Profile", edit_user_path(current_user) %></h3>
+<div class="usr">
+  <div class="u-av"><%= gravatar_for @user, size: 100 %></div>
+  <h1 class="u-name"><%= @user.name %></h1>
+  <% if current_user?(@user) %>
+    <div class="u-edit"> -
+      <%= link_to "Edit Profile", edit_user_path(current_user) %>
+    </div>
+  <% end %>
+  <h2 class="u-school"><%= school_name %></h2>
+  <h3 class="u-email"><%= @user.email %></h3>
+</div>
+<% if !@user.bio.nil? && @user.bio != "" %>
+    <div class="bio"><%= simple_format(@user.bio) %></div>
 <% end %>

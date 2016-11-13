@@ -1,0 +1,15 @@
+<% provide(:title, "Schools") %>
+<h1>All Schools</h1>
+
+<%= will_paginate %>
+
+<ul class="schools">
+  <% @schools.each do |school| %>
+      <li>
+        <%= link_to school.name, school %> |
+        Users: <%= User.all.where(school_id: school.id).count %>
+      </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

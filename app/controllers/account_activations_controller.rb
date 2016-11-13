@@ -5,7 +5,8 @@ class AccountActivationsController < ApplicationController
       user.activate
       login user
       flash[:success] = "Account activated!"
-      redirect_to "#{root_url}u/#{user.id}"
+      flash[:warning] = "Please change your password, or select 'forgot password' next time you log in."
+      redirect_to edit_user_url(user)
     else
       flash[:danger] = "Invalid activation link"
       redirect_to root_url

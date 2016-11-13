@@ -1,5 +1,5 @@
 <% provide(:title, "Users") %>
-<h1>All Users</h1>
+<h1>All <%= current_user.school_id == 1 ? "Super Users" : "Users at #{school_name}" %></h1>
 
 <%= will_paginate %>
 

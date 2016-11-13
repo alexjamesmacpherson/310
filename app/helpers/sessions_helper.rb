@@ -28,6 +28,16 @@ module SessionsHelper
     end
   end
 
+  # Returns current user's school
+  def current_school
+    School.find(current_user.school_id)
+  end
+
+  # Returns name of current user's school
+  def school_name
+    current_school.name
+  end
+
   # Returns true if user is logged in, false otherwise
   def logged_in?
     !current_user.nil?

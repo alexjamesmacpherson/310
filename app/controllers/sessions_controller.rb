@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       if user.activated?
         login user
+        flash[:info] = "Hi #{user.name.split[0]}, welcome back to ePerlego!"
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         redirect_back_or "#{root_url}u/#{user.id}"
       else

@@ -64,6 +64,7 @@ h3 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  word-wrap: break-word;
 }
 
 #logo {
@@ -124,8 +125,16 @@ footer {
 }
 
 .gravatar {
-//  float: left;
   margin-right: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px #777;
+  background-color:#337ab7;
+  display: inline-block;
+  //font-family: 'Bree Serif', serif;
+  text-shadow: 0px 0px 4px #777;
+  font-weight: bold;
+  color:#eee;
+  cursor: default;
 }
 
 .gravatar_edit {
@@ -134,7 +143,17 @@ footer {
 }
 
 .gravatar_change {
+  margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.nav .gravatar {
+  position: absolute;
+  border-radius: 2px;
+  top: 8px;
+  right: 20px;
+  box-shadow: 0px 0px 3px #111;
+  cursor: pointer;
 }
 
 /* Forms */
@@ -181,12 +200,67 @@ input {
 
 /* Users index */
 
-.users {
+.users, .schools {
   list-style: none;
   margin: 0;
+
   li {
     overflow: auto;
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
   }
+
+  .gravatar {
+    border-radius: 5px
+  }
+}
+
+.schools {
+  li {
+    color: $gray-light;
+  }
+}
+
+.bio {
+  background-color: #eee;
+  border-radius: 6px;
+  margin-left: 60px;
+  margin-right: 60px;
+  padding: 15px;
+  padding-bottom: 5px;
+}
+
+.usr {
+  min-height: 140px;
+}
+
+.usr .gravatar {
+  float: right;
+  margin-right: 20px;
+}
+
+.u-av {
+  margin-top: 13px;
+  float: left;
+  width: 25%;
+}
+
+.u-name, .u-school, .u-email, .u-edit {
+  float: left;
+  text-align: left;
+  margin: 5px;
+  width: 70%;
+}
+
+.u-name, .u-edit {
+  width: auto;
+}
+
+.u-edit {
+  font-size: 1.5em;
+  margin-top: 12px;
+}
+
+.usr_colour {
+  cursor: pointer;
 }

@@ -7,12 +7,12 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.where(activated: true).paginate(page: params[:page])
+    @users = User.where(activated: true, school_id: current_user.school_id).paginate(page: params[:page])
   end
 
   def show
@@ -20,11 +20,14 @@ class UsersController < ApplicationController
     if !@user.activated
       flash[:warning] = "Account not activated."
       redirect_to users_url
+    elsif @user.school_id != current_user.school_id
+      flash[:danger] = "User not found"
+      redirect_to users_url
     end
   end
 
   def new
-    if logged_in?
+    if logged_in? && !current_user.admin
       redirect_to "#{root_url}u/#{current_user.id}"
     else
       @user = User.new
@@ -35,12 +38,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # Creates new user, correctly referring school
   def create
-    @user = User.new(user_params)
+    @school = School.find(current_user.school_id)
+    @user = @school.users.build(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
+      flash[:info] = "#{@user.name.split[0]} has been sent an email with instructions to activate their account."
+      redirect_to users_url
 #      login @user
 #      flash[:success] = "Welcome to ePerlego!"
 #      redirect_to "#{root_url}u/#{@user.id}"
@@ -69,7 +74,7 @@ class UsersController < ApplicationController
 
     # Method uses strong params to prevent illicit assignment of other vars in the database (ie. a user assigning themselves admin)
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :color)
     end
 
     def logged_in_user

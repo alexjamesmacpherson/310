@@ -6,7 +6,7 @@
     <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
       <%= render 'shared/error_messages' %>
 
-      <%= hidden_field_tag :email, @user.email %>
+      <%= hidden_field_tag :email, @user.email # @user defined by get_user in controller using before_action for the edit and update pages %>
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>

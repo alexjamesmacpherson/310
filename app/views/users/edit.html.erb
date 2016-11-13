@@ -7,7 +7,26 @@
     <div class="gravatar_edit center">
       <%= gravatar_for @user %>
     </div>
-    <div class="gravatar_change center"><a href="http://gravatar.com/emails" target="_blank">Change Avatar</a></div>
-    <%= render 'shared/form' %>
+    <% if current_school.gravatar && current_user.gravatar %>
+      <div class="gravatar_change center"><a href="http://gravatar.com/emails" target="_blank">Change Avatar</a></div>
+    <% else %>
+        <div class="gravatar_change center"><a class="usr_colour">Change Colour</a></div>
+    <% end %>
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :bio %>
+      <%= f.text_area :bio, :maxlength => 255, :rows => 5, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.hidden_field :color, :value => current_user.color %>
+
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
