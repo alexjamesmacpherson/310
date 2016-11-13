@@ -6,6 +6,6 @@ class CreateSchools < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_reference :users, :school, index: true
-    add_foreign_key :schools, :users
+    add_foreign_key :users, :schools
   end
 end

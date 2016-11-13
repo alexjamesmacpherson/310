@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 20161113011509) do
 
   create_table "schools", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.boolean  "gravatar",   default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "gravatar",   default: false
   end
 
   create_table "users", force: :cascade do |t|
