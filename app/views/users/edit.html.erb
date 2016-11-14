@@ -7,24 +7,31 @@
     <div class="gravatar_edit center">
       <%= gravatar_for @user %>
     </div>
-    <% if current_school.gravatar && current_user.gravatar %>
-      <div class="gravatar_change center"><a href="http://gravatar.com/emails" target="_blank">Change Avatar</a></div>
+    <% if current_school.gravatar %>
+      <% if current_user.gravatar %>
+        <div class="gravatar_change center"><a href="http://gravatar.com/emails" target="_blank">Change</a> | <a class="usr_avatar">Remove</a></div>
+      <% else %>
+            <div class="gravatar_change center"><a class="usr_colour">Change Colour</a> | <a class="usr_avatar">Add Avatar</a></div>
+      <% end %>
     <% else %>
         <div class="gravatar_change center"><a class="usr_colour">Change Colour</a></div>
     <% end %>
     <%= form_for(@user) do |f| %>
+      <% @error = @user %>
       <%= render 'shared/error_messages' %>
 
       <%= f.label :bio %>
-      <%= f.text_area :bio, :maxlength => 255, :rows => 5, class: 'form-control' %>
+      <%= f.text_area :bio, :maxlength => 255, :rows => 5, class: 'form-control', placeholder: "Leave blank for no bio" %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.label :password, "Change password" %>
+      <%= f.password_field :password, class: 'form-control', placeholder: "Leave blank to keep password" %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm new password" %>
 
-      <%= f.hidden_field :color, :value => current_user.color %>
+      <%= f.hidden_field :color, :value => @user.color %>
+      <%= f.hidden_field :gravatar, :value => @user.gravatar %>
+      <%= f.hidden_field :gravatar_changed, :value => false %>
 
       <%= f.submit yield(:button_text), class: "btn btn-primary" %>
     <% end %>

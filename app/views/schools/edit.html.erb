@@ -1,0 +1,37 @@
+<% provide(:title, "Edit School") %>
+<% provide(:button_text, "Save Changes") %>
+<h1>Edit <%= School.find(params[:id]).name %>'s Settings</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="gravatar_edit center">
+      <%= gravatar_school School.find(params[:id]) %>
+    </div>
+    <div class="gravatar_change center"><a href="http://gravatar.com/emails" target="_blank">Change Logo</a></div>
+    <%= form_for(@school) do |f| %>
+        <% @error = @school %>
+        <%= render 'shared/error_messages' %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+
+        <%= f.label "Gravatar account email address" %>
+        <%= f.text_field :email, class: 'form-control', placeholder: 'Leave blank for no logo' %>
+
+        <%= f.label :motto %>
+        <%= f.text_field :motto, class: 'form-control', placeholder: 'Leave blank for no motto' %>
+
+        <%= f.label :gravatar, class: "checkbox inline form-check-label" do %>
+          <%= f.check_box :gravatar %>
+          <span>Allow Gravatar for users</span>
+        <% end %>
+
+        <%= f.hidden_field :users_changed, :value => false %>
+
+        <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %>
+    <div class="del_usrs center">
+      <%= "<a class='del-btn'>Delete Unactivated Users</a>".html_safe %>
+    </div>
+  </div>
+</div>

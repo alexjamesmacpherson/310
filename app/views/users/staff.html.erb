@@ -1,5 +1,5 @@
-<% provide(:title, @browser_title) %>
-<h1><%= current_user.school_id == 1 ? "All Super Users" : @page_title %></h1>
+<% provide(:title, "Staff") %>
+<h1>Staff at <%= school_name %></h1>
 
 <div class="pagination">
   <%= will_paginate @users, :container => false %>
@@ -8,7 +8,7 @@
 
 <ul class="users">
   <% @users.each do |user| %>
-    <%= render user %>
+      <%= render user %>
   <% end %>
 </ul>
 

@@ -7,12 +7,28 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :show, :staff, :students, :new, :create, :edit, :update, :update_gravatar, :destroy]
+  before_action :correct_user,   only: [:edit, :update, :update_gravatar]
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.where(activated: true, school_id: current_user.school_id).paginate(page: params[:page])
+    if(params.has_key?(:search) && params[:search].strip != "")
+      @users = User.where(activated: true, school_id: current_user.school_id).order('name ASC').where("name like ?", "%#{params[:search]}%").paginate(page: params[:page], :per_page => 20)
+      @page_title = "Search results for \"#{params[:search]}\""
+      @browser_title = "Results for \"#{params[:search]}\""
+    else
+      @users = User.where(activated: true, school_id: current_user.school_id).order('name ASC').paginate(page: params[:page], :per_page => 20)
+      @page_title = "All Users at #{school_name}"
+      @browser_title = "Users"
+    end
+  end
+
+  def students
+    @users = User.where(activated: true, school_id: current_user.school_id, admin: false).order('name ASC').paginate(page: params[:page], :per_page => 20)
+  end
+
+  def staff
+    @users = User.where(activated: true, school_id: current_user.school_id, admin: true).order('name ASC').paginate(page: params[:page], :per_page => 20)
   end
 
   def show
@@ -46,10 +62,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       flash[:info] = "#{@user.name.split[0]} has been sent an email with instructions to activate their account."
-      redirect_to users_url
-#      login @user
-#      flash[:success] = "Welcome to ePerlego!"
-#      redirect_to "#{root_url}u/#{@user.id}"
+      redirect_to adduser_url
     else
       render 'new'
     end
@@ -58,8 +71,13 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated!"
-      redirect_to "#{root_url}u/#{@user.id}"
+      if @user.gravatar_changed
+        flash[:info] = @user.gravatar ? "Added Gravatar - make sure to use the same email address as you use to login to ePerlego." : "Avatar removed."
+        redirect_to edit_user_url
+      else
+        flash[:success] = "Profile updated!"
+        redirect_to "#{root_url}u/#{@user.id}"
+      end
     else
       render 'edit'
     end
@@ -71,11 +89,15 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def to_boolean(str)
+    str == 'true'
+  end
+
   private
 
     # Method uses strong params to prevent illicit assignment of other vars in the database (ie. a user assigning themselves admin)
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :color)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :color, :gravatar, :gravatar_changed)
     end
 
     def logged_in_user
@@ -92,8 +114,9 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 
-    # Confirms admin user
+    # Confirms admin user of current school
     def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user.admin? && (current_user.school_id == @user.school_id || current_user.school_id == 1)
     end
 end

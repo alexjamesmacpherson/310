@@ -86,6 +86,27 @@ p {
   background: #111;
 }
 
+
+.nav .search {
+  padding-top: 7px;
+  padding-left: 10px;
+
+  &:hover {
+    background: none;
+  }
+
+  .form-control {
+    margin-bottom: 0;
+    background: #333;
+    border: 1px solid #444;
+    color: #eee;
+  }
+
+  .form-control:focus {
+    background: #444;
+  }
+}
+
 footer {
   margin-top: 45px;
   padding-top: 5px;
@@ -127,8 +148,7 @@ footer {
 .gravatar {
   margin-right: 10px;
   border-radius: 10px;
-  box-shadow: 0px 0px 3px #777;
-  background-color:#337ab7;
+  //box-shadow: 0px 0px 3px #777;
   display: inline-block;
   //font-family: 'Bree Serif', serif;
   text-shadow: 0px 0px 4px #777;
@@ -142,9 +162,18 @@ footer {
   margin-bottom: 5px;
 }
 
-.gravatar_change {
+.gravatar_change, .del_usrs {
   margin-top: 10px;
   margin-bottom: 10px;
+  color: #aaa;
+}
+
+.del_usrs {
+  margin-top: 10px;
+}
+
+.del-btn {
+  cursor: pointer;
 }
 
 .nav .gravatar {
@@ -193,9 +222,16 @@ input {
   }
 }
 
-#session_remember_me {
+#session_remember_me, #school_gravatar {
   width: auto;
   margin-left: 0;
+}
+
+.form-check-label {
+  margin-top: 0px;
+  span {
+    font-weight: bold;
+  }
 }
 
 /* Users index */
@@ -208,6 +244,7 @@ input {
     overflow: auto;
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
+    color: #999;
   }
 
   .gravatar {
@@ -215,10 +252,13 @@ input {
   }
 }
 
-.schools {
-  li {
-    color: $gray-light;
-  }
+.pagination .center {
+  color: $gray-light;
+  font-size: 0.9em;
+}
+
+.pagination a {
+  margin-bottom: 5px;
 }
 
 .bio {
@@ -228,6 +268,7 @@ input {
   margin-right: 60px;
   padding: 15px;
   padding-bottom: 5px;
+  max-height: 200px;
 }
 
 .usr {
@@ -239,28 +280,59 @@ input {
   margin-right: 20px;
 }
 
+.u-school .gravatar {
+  float: left;
+  margin-left: 10px;
+  margin-right: 0px;
+  border-radius: 3px;
+}
+
+footer .gravatar {
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
 .u-av {
   margin-top: 13px;
   float: left;
   width: 25%;
 }
 
-.u-name, .u-school, .u-email, .u-edit {
+.u-name, .u-school, .u-email, .u-edit, .s-name, .s-edit {
   float: left;
   text-align: left;
   margin: 5px;
   width: 70%;
 }
 
-.u-name, .u-edit {
+.u-email {
+  color: #aaa;
+}
+
+.u-name, .u-edit, .s-name, .s-edit {
   width: auto;
 }
 
-.u-edit {
+.u-edit, .s-edit {
   font-size: 1.5em;
   margin-top: 12px;
 }
 
-.usr_colour {
+.s-name {
+  margin-top: 9px;
+}
+
+.s-edit {
+  margin-top: 17px;
+  color: #aaa;
+}
+
+.usr_colour, .usr_avatar {
   cursor: pointer;
+}
+
+.motto {
+  font-style: italic;
+  font-family: 'Bree Serif', serif;
+  margin-top: 0px;
 }

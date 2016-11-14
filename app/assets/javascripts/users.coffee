@@ -7,3 +7,10 @@ $(document).on "turbolinks:load", ->
     colour_id = parseInt($("#user_color").val()) % 5 + 1
     $("#user_color").val(colour_id)
     $(".gravatar").css("background-color", colours[colour_id - 1])
+
+  $(".usr_avatar").click ->
+    $("#user_gravatar").val($("#user_gravatar").val() == "false" ? true : false)
+    $("#user_gravatar_changed").val(true)
+    $("#user_password").val("")
+    $("#user_password_confirmation").val("")
+    $(".edit_user").submit()

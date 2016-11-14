@@ -1,7 +1,10 @@
 School.create!(name: "Super Users",
                gravatar:  true)
-School.create!(name: "Example College")
-School.create!(name: "Test College")
+School.create!(name:  "Example College",
+               email: "lexmac0@hotmail.co.uk",
+               motto: "Ad Alta")
+School.create!(name:  "Test College",
+               motto: "Lorem Ipsum")
 
 User.create!(name:  "Alex Macpherson",
              email: "alexjamesmacpherson@gmail.com",

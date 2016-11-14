@@ -1,15 +1,28 @@
-<% provide(:title, "Schools") %>
-<h1>All Schools</h1>
+<% provide(:title, @browser_title) %>
+<h1><%= @page_title %></h1>
 
-<%= will_paginate %>
+
+<div class="pagination">
+  <%= will_paginate @schools, :container => false %>
+  <div class="center"><%= page_entries_info %></div>
+</div>
 
 <ul class="schools">
   <% @schools.each do |school| %>
+      <% all_users = User.all.where(school_id: school.id) %>
       <li>
+        <%= gravatar_school school, size: 40 %>
         <%= link_to school.name, school %> |
-        Users: <%= User.all.where(school_id: school.id).count %>
+        Users: <%= all_users.count %>
+        <% if all_users.where(activated: false).count > 0 %>
+          (of which unactivated - <%= all_users.where(activated: false).count %>)
+        <% end %>
       </li>
   <% end %>
 </ul>
 
-<%= will_paginate %>
+
+<div class="pagination">
+  <%= will_paginate @schools, :container => false %>
+  <div class="center"><%= page_entries_info %></div>
+</div>

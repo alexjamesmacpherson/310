@@ -9,4 +9,15 @@
       <li><%= link_to "Contact", contact_path %></li>
     </ul>
   </nav>
+  <% if logged_in? %>
+      <div class="center">
+        <% if !current_school.email.nil? && current_school.email != "" %>
+            <%= gravatar_school current_school, size: 20 %>
+        <% end %>
+        <%= school_name %>
+        <% if !current_school.motto.nil? && current_school.motto != "" %>
+            <span class="motto"><%= " - #{current_school.motto}" %></span>
+        <% end %>
+      </div>
+  <% end %>
 </footer>

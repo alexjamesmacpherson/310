@@ -1,2 +1,23 @@
-<h1>Schools#show</h1>
-<p>Find me in app/views/schools/show.html.erb</p>
+<% provide(:title, @school.name) %>
+<div class="usr">
+  <div class="u-av"><%= gravatar_school @school, size: 100 %></div>
+  <h1 class="s-name"><%= @school.name %></h1>
+  <div class="s-edit"> -
+    <%= link_to "Edit Settings", edit_school_path(@school) %> |
+    <%= link_to "Add New User", adduser_path %>
+  </div>
+  <h2 class="u-school motto">
+    <% if !@school.motto.nil? && @school.motto != "" %>
+      <%= @school.motto %>
+    <% else %>
+        Welcome to your ePerlego dashboard.
+    <% end %>
+  </h2>
+  <h3 class="u-email">
+    <% all_users = User.all.where(school_id: @school.id) %>
+    Users: <%= all_users.count %>
+    <% if all_users.where(activated: false).count > 0 %>
+      (of which unactivated - <%= all_users.where(activated: false).count %>)
+    <% end %>
+  </h3>
+</div>
