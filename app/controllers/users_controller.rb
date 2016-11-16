@@ -56,13 +56,14 @@ class UsersController < ApplicationController
 
   # Creates new user, correctly referring school
   def create
-    @school = School.find(current_user.school_id)
+
+    @school = School.find(current_user.school_id == 1 && params[:user].has_key?(:school) ? params[:user][:school] : current_user.school_id)
     @user = @school.users.build(user_params)
-    @user.color = rand(1...6);
+    @user.color = rand(1...6)
     if @user.save
       @user.send_activation_email
       flash[:info] = "#{@user.name.split[0]} has been sent an email with instructions to activate their account."
-      redirect_to adduser_url
+      redirect_to current_user.school_id == 1 && params[:user].has_key?(:school) ? "#{adduser_url}?sid=#{params[:user][:school]}" : adduser_url
     else
       render 'new'
     end

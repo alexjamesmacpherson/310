@@ -1,10 +1,11 @@
 <% provide(:title, @school.name) %>
+<% @add_url = current_school.id == 1 && @school.id != 1 ? "#{adduser_path}?sid=#{@school.id}" : adduser_path %>
 <div class="usr">
   <div class="u-av"><%= gravatar_school @school, size: 100 %></div>
   <h1 class="s-name"><%= @school.name %></h1>
   <div class="s-edit"> -
     <%= link_to "Edit Settings", edit_school_path(@school) %> |
-    <%= link_to "Add New User", adduser_path %>
+    <%= link_to "Add New User", @add_url %>
   </div>
   <h2 class="u-school motto">
     <% if !@school.motto.nil? && @school.motto != "" %>

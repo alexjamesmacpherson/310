@@ -1,6 +1,8 @@
 <% provide(:title, "Add User") %>
 <% @temp_pass = User.new_token %>
-<h1>Add a new user to <%= school_name %></h1>
+<% @temp_school = current_user.school_id == 1 && params.has_key?(:sid) ? params[:sid] : current_school.id %>
+<% @temp_name = current_user.school_id == 1 && params.has_key?(:sid) ? School.find(params[:sid]).name : school_name %>
+<h1>Add a new user to <%= @temp_name %></h1>
 <h3>They'll be sent an email to activate their account.</h3>
 
 <div class="row">
@@ -17,6 +19,7 @@
 
         <%= f.hidden_field :password, :value => @temp_pass %>
         <%= f.hidden_field :password_confirmation, :value => @temp_pass %>
+        <%= f.hidden_field :school, :value => @temp_school %>
 
         <%= f.submit "Create User", class: "btn btn-primary" %>
     <% end %>
