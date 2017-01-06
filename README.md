@@ -1,4 +1,4 @@
-# Thesis Project
+## Thesis Project
 
 Development of a Feature-Rich Social VLE to Promote Student Performance
 
